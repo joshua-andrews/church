@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Peter and the First Church</title>
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Georgia', serif;
+            background-color: #FFFDE7;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .slider::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: row;
+        }
+        .image-container {
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-right: 6px solid #B8860B;
+        }
+        .text-container {
+            width: 50%;
+            height: 100%;
+            padding: 60px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #FFFDE7;
+            overflow: hidden;
+        }
+        .script-box {
+            font-size: 32px;
+            line-height: 1.55;
+            color: #2c2c2c;
+        }
+        .cue {
+            color: #C62828;
+            display: block;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 0.82em;
+        }
+        @media screen and (orientation: portrait) {
+            .slide { flex-direction: column; }
+            .image-container { width: 100vw; height: 50vh; border-right: none; border-bottom: 6px solid #B8860B; }
+            .text-container { width: 100vw; height: 50vh; padding: 30px 40px; overflow-y: auto; }
+            .script-box { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('https://raw.githubusercontent.com/joshua-andrews/church/main/Third-Sunday-of-Easter_April-19-2026/1.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Just weeks after Easter, Jesus' friend Peter stood up in front of thousands of people in Jerusalem and spoke with a big, bold voice: 'Everyone in Israel needs to know — God has made Jesus both Lord and Messiah!'
+                    <span class="cue">* Stand up tall and put on your most confident face — like Peter!</span>
+                    It was one of the bravest things anyone had ever done.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('https://raw.githubusercontent.com/joshua-andrews/church/main/Third-Sunday-of-Easter_April-19-2026/2.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    When the people heard Peter's words, they felt it right in their chests. The Bible says they were 'cut to the heart' — a deep, heavy sadness. They cried out: 'Brothers! What should we do?'
+                    <span class="cue">* Show me what it looks like when you feel really sad or sorry about something.</span>
+                    Peter answered: 'Repent and be baptized — every single one of you. Your sins will be forgiven, and you will receive the gift of the Holy Spirit.'
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('https://raw.githubusercontent.com/joshua-andrews/church/main/Third-Sunday-of-Easter_April-19-2026/3.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Then Peter said the most amazing thing: 'This promise is for YOU. And for your CHILDREN. And for everyone who is far away — absolutely everyone that God calls.'
+                    <span class="cue">* Point to yourself — "for YOU." Point to your neighbour — "for them." Spread your arms wide — "for EVERYONE!"</span>
+                    People ran to the water to be baptized — to say YES to God's promise and YES to belonging to God's family.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('https://raw.githubusercontent.com/joshua-andrews/church/main/Third-Sunday-of-Easter_April-19-2026/4.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    And that day — that one single day — about three thousand people were welcomed into the church family.
+                    <span class="cue">* Throw your hands in the air and cheer — THREE THOUSAND PEOPLE!</span>
+                    The first Easter church grew because everyone was welcomed in. And that same promise is still for us today — for you, for me, and for everyone, near and far.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
