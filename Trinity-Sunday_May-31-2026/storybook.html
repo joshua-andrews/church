@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Go and Make Disciples - Matthew 28</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Fredoka One', cursive;
+            background-color: #FFFDE7;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .slider::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: row;
+        }
+        .image-container {
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-right: 6px solid #B8860B;
+        }
+        .text-container {
+            width: 50%;
+            height: 100%;
+            padding: 60px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #FFFDE7;
+            overflow: hidden;
+        }
+        .script-box {
+            font-size: 33px;
+            line-height: 1.6;
+            color: #2c2c2c;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .cue-box {
+            padding-top: 20px;
+            border-top: 2px solid #DAA520;
+            font-size: 26px;
+            color: #C62828;
+            line-height: 1.5;
+        }
+        @media screen and (orientation: portrait) {
+            .slide { flex-direction: column; }
+            .image-container { width: 100vw; height: 50vh; border-right: none; border-bottom: 6px solid #B8860B; }
+            .text-container { width: 100vw; height: 50vh; padding: 25px 35px; overflow-y: auto; }
+            .script-box { font-size: 20px; }
+            .cue-box { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('1.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    After Jesus rose from the dead, he told his eleven disciples to meet him on a mountain in Galilee. When they got there and saw him, they fell to their knees and worshipped him. But some of them were not sure. They doubted. Even after everything they had seen, some of them still were not certain.
+                </div>
+                <div class="cue-box">
+                    * Have you ever not been sure about something even when everyone else seemed sure? Shrug your shoulders and make your most confused face.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('2.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Jesus came close to them and said something incredible: "All authority in heaven and on earth has been given to me." That means there is nothing and no one more powerful than Jesus. Not in the sky, not on the ground, not anywhere. All of it belongs to him.
+                </div>
+                <div class="cue-box">
+                    * Repeat after me in your biggest voice: "ALL authority in heaven and on earth!"
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('3.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Then Jesus gave them the most important job in history. He said: "Go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you." He was sending them out to tell everyone, everywhere, about God.
+                </div>
+                <div class="cue-box">
+                    * Point as far as you can. Point to the door. Point to the window. Point everywhere! That is how far Jesus wants the message to go.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('4.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    And then Jesus said the last and most beautiful thing: "And remember, I am with you always, to the end of the age." He was not sending them out alone. He promised to be with them every single day, no matter what. And that same promise is for us too. Jesus is with us always.
+                </div>
+                <div class="cue-box">
+                    * Wrap your arms around yourself in the biggest hug you can. That is what "I am with you always" feels like.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
