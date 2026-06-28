@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Cup of Cold Water - Matthew 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Fredoka One', cursive;
+            background-color: #E0F7FA;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .slider::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: row;
+        }
+        .image-container {
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-right: 6px solid #00ACC1;
+        }
+        .text-container {
+            width: 50%;
+            height: 100%;
+            padding: 60px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #E0F7FA;
+            overflow: hidden;
+        }
+        .script-box {
+            font-size: 33px;
+            line-height: 1.6;
+            color: #006064;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .cue-box {
+            padding-top: 20px;
+            border-top: 2px solid #26C6DA;
+            font-size: 26px;
+            color: #D84315;
+            line-height: 1.5;
+        }
+        @media screen and (orientation: portrait) {
+            .slide { flex-direction: column; }
+            .image-container { width: 100vw; height: 50vh; border-right: none; border-bottom: 6px solid #00ACC1; }
+            .text-container { width: 100vw; height: 50vh; padding: 25px 35px; overflow-y: auto; }
+            .script-box { font-size: 20px; }
+            .cue-box { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('1.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Jesus was teaching his disciples about how important it is to be a good host and a good helper. He told them, "Whoever welcomes you, welcomes me. And whoever welcomes me, welcomes God."
+                </div>
+                <div class="cue-box">
+                    * Open your arms wide like you're giving a big hug. That's what it means to welcome someone!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('2.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Jesus explained that if someone comes to your town—like a prophet or a righteous person who is traveling—and you open your door to them and give them a place to rest, God sees that. And God will reward you for your kindness!
+                </div>
+                <div class="cue-box">
+                    * Pretend you are opening a heavy door and waving someone inside your house to rest.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('3.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Jesus then said something amazing: "And whoever gives even a cup of cold water to one of these little ones... truly I tell you, none of these will lose their reward."
+                </div>
+                <div class="cue-box">
+                    * Make your hands into the shape of a cup and pretend to take a long drink of cold water. Ahhhh!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('4.png');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    A cup of cold water might seem like a very small thing. But Jesus wanted them to know that every single act of kindness matters to God. No matter how small you are, or how small your help seems, God notices and loves it when you care for others.
+                </div>
+                <div class="cue-box">
+                    * Give the person next to you a big high five. God notices when you are a good helper!
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
