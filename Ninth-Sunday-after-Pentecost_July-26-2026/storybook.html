@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nothing Can Separate Us - Romans 8</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Fredoka One', cursive;
+            background-color: #F3E5F5;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .slider::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: row;
+        }
+        .image-container {
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-right: 6px solid #8E24AA;
+        }
+        .text-container {
+            width: 50%;
+            height: 100%;
+            padding: 60px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #F3E5F5;
+            overflow: hidden;
+        }
+        .script-box {
+            font-size: 33px;
+            line-height: 1.6;
+            color: #4A148C;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .cue-box {
+            padding-top: 20px;
+            border-top: 2px solid #AB47BC;
+            font-size: 26px;
+            color: #E65100;
+            line-height: 1.5;
+        }
+        @media screen and (orientation: portrait) {
+            .slide { flex-direction: column; }
+            .image-container { width: 100vw; height: 50vh; border-right: none; border-bottom: 6px solid #8E24AA; }
+            .text-container { width: 100vw; height: 50vh; padding: 25px 35px; overflow-y: auto; }
+            .script-box { font-size: 20px; }
+            .cue-box { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('1.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    We all have big, difficult feelings sometimes. Sometimes we feel so sad, scared, or confused that we don't even know what to say or how to pray to God about it.
+                </div>
+                <div class="cue-box">
+                    * Show me your most frustrated or sad face. What does it look like when you have big, difficult feelings?
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('2.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    But God sends the Holy Spirit to help us! The Bible says that when we don't have the words, the Holy Spirit prays for us with "groanings too deep for words." God understands exactly what is in our hearts.
+                </div>
+                <div class="cue-box">
+                    * Take a deep breath and let out a big sigh. That's what it sounds like when the Holy Spirit helps our hearts feel settled.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('3.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Paul, who wrote this letter, tells us that we are part of a big family with Jesus. And because we are in God's family, we can help each other when we have those big, difficult feelings.
+                </div>
+                <div class="cue-box">
+                    * Wrap your arms around yourself in a big hug, or give someone next to you a hug. We are a family!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('4.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Paul asked a huge question: "Who will separate us from the love of Christ?" He answered it by saying NOTHING can! Not being scared, not being in danger... nothing in all creation can ever separate us from God's love!
+                </div>
+                <div class="cue-box">
+                    * Raise your hands as high as you can and shout, "Nothing can separate us!"
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
