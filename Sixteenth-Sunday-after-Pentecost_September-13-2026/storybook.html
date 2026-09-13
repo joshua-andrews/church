@@ -2,72 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Storybook: Mercy and Forgiveness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Georgia', serif;
-            background-color: #000;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Fredoka One', cursive;
+            background-color: #E8F5E9;
             overflow: hidden;
         }
-        .carousel-container {
+        .slider {
+            display: flex;
             width: 100vw;
             height: 100vh;
-            display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
+        .slider::-webkit-scrollbar { display: none; }
         .slide {
+            flex: 0 0 100vw;
             width: 100vw;
             height: 100vh;
-            flex-shrink: 0;
             scroll-snap-align: start;
             display: flex;
-            flex-direction: column;
-            position: relative;
+            flex-direction: row;
         }
         .image-container {
-            flex: 2;
+            width: 50%;
+            height: 100%;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
+            border-right: 6px solid #4CAF50;
         }
         .text-container {
-            flex: 1;
-            background-color: #E8F5E9;
-            padding: 30px;
+            width: 50%;
+            height: 100%;
+            padding: 60px 70px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            border-top: 5px solid #4CAF50;
+            justify-content: space-between;
+            background-color: #E8F5E9;
+            overflow: hidden;
         }
         .script-box {
-            font-size: 24px;
+            font-size: 33px;
+            line-height: 1.6;
             color: #1B5E20;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            flex: 1;
+            display: flex;
+            align-items: center;
         }
         .cue-box {
-            font-size: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #4CAF50;
+            font-size: 26px;
             color: #D32F2F;
-            font-weight: bold;
-            font-style: italic;
-            background: #fff;
-            padding: 15px;
-            border-left: 5px solid #D32F2F;
-            border-radius: 4px;
+            line-height: 1.5;
         }
-        /* Hide scrollbar */
-        ::-webkit-scrollbar { display: none; }
+        @media screen and (orientation: portrait) {
+            .slide { flex-direction: column; }
+            .image-container { width: 100vw; height: 50vh; border-right: none; border-bottom: 6px solid #4CAF50; }
+            .text-container { width: 100vw; height: 50vh; padding: 25px 35px; overflow-y: auto; }
+            .script-box { font-size: 20px; }
+            .cue-box { font-size: 18px; }
+        }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <div class="slider">
+
         <!-- SLIDE 1 -->
         <div class="slide">
             <div class="image-container" style="background-image: url('1.jpg');"></div>
@@ -119,6 +128,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </body>
 </html>
