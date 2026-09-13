@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storybook: Mercy and Forgiveness</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Georgia', serif;
+            background-color: #000;
+            overflow: hidden;
+        }
+        .carousel-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .image-container {
+            flex: 2;
+            background-size: cover;
+            background-position: center;
+        }
+        .text-container {
+            flex: 1;
+            background-color: #E8F5E9;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top: 5px solid #4CAF50;
+        }
+        .script-box {
+            font-size: 24px;
+            color: #1B5E20;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .cue-box {
+            font-size: 20px;
+            color: #D32F2F;
+            font-weight: bold;
+            font-style: italic;
+            background: #fff;
+            padding: 15px;
+            border-left: 5px solid #D32F2F;
+            border-radius: 4px;
+        }
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('1.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    One day, Peter asked Jesus, "How many times should I forgive someone who does something wrong to me? Seven times?" Jesus smiled and said, "No, Peter. Seventy-seven times!" which meant we should ALWAYS forgive.
+                </div>
+                <div class="cue-box">
+                    * Hold up seven fingers and look confused, just like Peter!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('2.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Jesus told a story: A king had a servant who owed him a massive amount of money. The servant begged, "Please have mercy on me!" The king had a kind heart and totally forgave the huge debt!
+                </div>
+                <div class="cue-box">
+                    * Put your hands together, bow your head, and pretend to beg for mercy!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('3.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    But then, that same servant went and found a man who owed him just a tiny bit of money. Instead of forgiving him, he was super grumpy and mean, and he threw the poor man in jail!
+                </div>
+                <div class="cue-box">
+                    * Cross your arms, stomp your foot, and show me your meanest, grumpiest face!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('4.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Jesus said that the king was very disappointed. Because God has shown us so much mercy and love, we must also show mercy and forgive our friends and family from the bottom of our hearts.
+                </div>
+                <div class="cue-box">
+                    * Run and give someone a big hug to show forgiveness and mercy!
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
