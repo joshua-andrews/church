@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Storybook: David the Shepherd Boy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Fredoka One', cursive;
+            background-color: #E8F5E9;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .slider::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: row;
+        }
+        .image-container {
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-right: 6px solid #4CAF50;
+        }
+        .text-container {
+            width: 50%;
+            height: 100%;
+            padding: 60px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #E8F5E9;
+            overflow: hidden;
+        }
+        .script-box {
+            font-size: 33px;
+            line-height: 1.6;
+            color: #1B5E20;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        @media screen and (orientation: portrait) {
+            .slide { flex-direction: column; }
+            .image-container { width: 100vw; height: 50vh; border-right: none; border-bottom: 6px solid #4CAF50; }
+            .text-container { width: 100vw; height: 50vh; padding: 25px 35px; overflow-y: auto; }
+            .script-box { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+
+        <!-- SLIDE 1 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('1.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    A long, long time ago, in a little town called Bethlehem, there lived a man named Jesse. Jesse had a BIG family. He had 8 sons! Let’s count them: 1, 2, 3, 4, 5, 6, 7… Wait! I only see 7. Where is the last one?
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('2.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    God had a very important job for a man named Samuel. God said, “Samuel, go to Jesse’s house. I have chosen one of his sons to be the next king!” So Samuel walked, and walked, and walked, all the way to Bethlehem.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('3.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Samuel saw the oldest brother. He was tall and strong! Samuel thought, “He looks like a king. This must be him!” But God said, “No. People look at the outside. But I look at the heart.”
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('4.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Samuel looked at the next brother… Not him! The next one… Not him! All 7 brothers… NOT HIM! Samuel asked, “Are these ALL your sons?” Jesse said, “There’s one more, the youngest. He’s out with the sheep.”
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('5.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    Samuel said, “Go and get him!” The youngest brother was out on the hills, taking care of his sheep. His name was David! Can you help me find David? Get your binoculars ready!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide">
+            <div class="image-container" style="background-image: url('6.jpg');"></div>
+            <div class="text-container">
+                <div class="script-box">
+                    When David came, God said, “This is the one!” Samuel poured special oil on David’s head. God chose David to be king! God didn’t look at the tallest or the oldest. God looked at David’s heart. And God wants us to know him too!
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        // Shrink the words on smaller iPads so nothing gets cut off.
+        function fitText() {
+            document.querySelectorAll('.text-container').forEach(function (tc) {
+                var box = tc.querySelector('.script-box');
+                box.style.fontSize = '';
+                var size = parseFloat(getComputedStyle(box).fontSize);
+                while (tc.scrollHeight > tc.clientHeight + 1 && size > 16) {
+                    size -= 1;
+                    box.style.fontSize = size + 'px';
+                }
+            });
+        }
+        window.addEventListener('load', fitText);
+        window.addEventListener('resize', fitText);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitText);
+    </script>
+</body>
+</html>
