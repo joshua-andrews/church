@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>God Looks at the Heart – Sing-Along</title>
+<style>
+:root{
+  --g9:#1B5E20; --g6:#43A047; --g3:#A5D6A7; --g1:#E8F5E9;
+  --ink:#17361B; --todo:#37474F; --done:#43A047; --now:#E65100;
+  --card:rgba(255,255,255,.92);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{
+  font-family:"Arial Rounded MT Bold","Segoe UI",system-ui,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,#BEE3FF 0%,#EEF8FF 55%,#E8F5E9 100%);
+}
+.e,.pic,.sheep,button{font-family:"Arial Rounded MT Bold","Segoe UI","Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif}
+[hidden]{display:none!important}
+
+/* scenery */
+#hills{position:fixed;left:0;bottom:0;width:100%;height:30vh;pointer-events:none}
+.sheep{position:fixed;pointer-events:none;line-height:1}
+
+/* layout */
+#app{position:relative;height:100%;display:flex;flex-direction:column}
+header{display:flex;justify-content:space-between;align-items:center;padding:2vh 3vw 0;
+  font-size:clamp(14px,2.6vh,26px);color:var(--g9);font-weight:700}
+.dots{display:flex;align-items:center;gap:.5em}
+.dot{width:1.1em;height:1.1em;border-radius:50%;border:.18em solid var(--g6);background:#fff;cursor:pointer;padding:0}
+.dot.on{background:var(--g6)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:1vh 3vw 11vh}
+.card{background:var(--card);border-radius:clamp(20px,4vh,40px);box-shadow:0 12px 40px rgba(27,94,32,.2);
+  padding:2.6vh 3vw 3.2vh;width:min(94vw,1500px);text-align:center}
+.pic{height:15vh;display:flex;align-items:center;justify-content:center;font-size:clamp(44px,12.5vh,150px);line-height:1}
+.pic.small{font-size:clamp(28px,7.5vh,92px);letter-spacing:.05em}
+.curbox{font-size:clamp(28px,min(5.5vw,10vh),108px);min-height:2.6em;display:flex;align-items:center;justify-content:center;margin-top:1vh}
+.cur{font-weight:800;line-height:1.28;text-wrap:balance}
+.cur.in{animation:rise .35s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(.3em)}to{opacity:1;transform:none}}
+.w{white-space:nowrap}
+.s{display:inline-block;color:var(--todo);transform-origin:50% 85%}
+.s.done{color:var(--done)}
+.s.now{color:var(--now);animation:hop .45s ease-out both}
+@keyframes hop{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-.14em) scale(1.15)}100%{transform:translateY(0) scale(1.08)}}
+.plain{color:var(--g9)}
+.next{margin-top:1.2vh;font-size:clamp(15px,min(2.4vw,4vh),42px);color:#61786A;font-weight:700;min-height:1.3em}
+.act{display:inline-block;margin-top:2vh;background:var(--g1);border:.14em solid var(--g3);color:var(--g9);
+  border-radius:999px;padding:.3em 1em;font-size:clamp(16px,min(2.6vw,4.4vh),44px);font-weight:800}
+.act.count{font-size:clamp(40px,11vh,120px);padding:.05em .9em;color:var(--now);border-color:#FFCC80;background:#FFF3E0}
+
+/* controls */
+#controls{position:fixed;left:50%;bottom:2.4vh;transform:translateX(-50%);display:flex;gap:8px;align-items:center;
+  background:rgba(255,255,255,.96);padding:8px 10px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.15);
+  transition:opacity .4s;z-index:5;flex-wrap:wrap;justify-content:center;max-width:96vw}
+#controls.hide{opacity:0;pointer-events:none}
+button{font-size:clamp(13px,2vh,18px);border:0;border-radius:999px;padding:.55em 1em;background:var(--g1);color:var(--g9);cursor:pointer;font-weight:700}
+button:hover{background:var(--g3)}
+.seg{display:flex;background:var(--g1);border-radius:999px;padding:3px}
+.seg button{background:transparent}
+.seg button.on{background:var(--g6);color:#fff}
+#bar{position:fixed;left:0;bottom:0;height:6px;background:var(--g6);width:0;z-index:4}
+#paused{position:fixed;top:1.2vh;left:50%;transform:translateX(-50%);background:var(--now);color:#fff;font-weight:800;
+  padding:.45em 1.2em;border-radius:999px;font-size:clamp(16px,3vh,30px);z-index:6}
+
+/* start + end screens */
+.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(232,245,233,.72);
+  backdrop-filter:blur(3px);z-index:10;padding:16px}
+.overlay .card{max-width:920px}
+.overlay .pic{height:auto;font-size:clamp(48px,11vh,120px)}
+.overlay h1{font-size:clamp(30px,7vh,72px);margin:.15em 0;color:var(--g9)}
+.overlay p{font-size:clamp(16px,2.8vh,28px);margin:.35em 0;color:#35553A}
+.overlay .seg{display:inline-flex;margin-top:2vh}
+.overlay .seg button{font-size:clamp(14px,2.4vh,22px)}
+.big{font-size:clamp(20px,3.6vh,36px)!important;padding:.6em 1.6em;background:var(--g6);color:#fff;margin-top:2.4vh}
+.big:hover{background:var(--g9)}
+.tips{font-size:clamp(12px,1.9vh,18px)!important;color:#5d7561!important;margin-top:2.2vh!important}
+</style>
+</head>
+<body>
+
+<svg id="hills" viewBox="0 0 1600 400" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 210 C 300 110, 620 250, 920 180 S 1400 110, 1600 190 L1600 400 L0 400Z" fill="#A5D6A7"/>
+  <path d="M0 300 C 380 220, 720 330, 1100 265 S 1480 240, 1600 280 L1600 400 L0 400Z" fill="#81C784"/>
+</svg>
+<div class="sheep" style="left:3vw;bottom:5vh;font-size:7vh">🐑</div>
+<div class="sheep" style="left:13vw;bottom:13vh;font-size:4.5vh">🐑</div>
+<div class="sheep" style="right:4vw;bottom:7vh;font-size:6.5vh;transform:scaleX(-1)">🐑</div>
+
+<div id="app">
+  <header>
+    <div>🎵 God Looks at the Heart</div>
+    <div class="dots">Verse
+      <button class="dot on" aria-label="Go to verse 1"></button>
+      <button class="dot" aria-label="Go to verse 2"></button>
+      <button class="dot" aria-label="Go to verse 3"></button>
+    </div>
+  </header>
+  <main>
+    <div class="card" id="card">
+      <div class="pic" id="pic">🎵</div>
+      <div class="curbox"><div class="cur" id="cur"></div></div>
+      <div class="next" id="next"></div>
+      <div class="act" id="act"></div>
+    </div>
+  </main>
+</div>
+
+<div id="paused" hidden>⏸ Paused – press Space to keep going</div>
+
+<div id="controls" class="hide">
+  <button id="pp">⏸ Pause</button>
+  <button id="restart">⟲ Start over</button>
+  <div class="seg speeds"></div>
+  <button id="mute">🔊 Music on</button>
+  <button id="full">⛶ Full screen</button>
+</div>
+<div id="bar"></div>
+
+<div class="overlay" id="startScreen">
+  <div class="card">
+    <div class="pic">👦🐑❤️</div>
+    <h1>God Looks at the Heart</h1>
+    <p>A slow sing-along for 1 Samuel 16:7</p>
+    <p>Tune: <b>Twinkle, Twinkle, Little Star</b> 🎵</p>
+    <div class="seg speeds"></div><br>
+    <button class="big" id="go">▶ Start the song</button>
+    <p class="tips" id="pianoStatus">🎹 Loading piano sound…</p>
+    <p class="tips">Space = pause / play · ← → = back / skip a line · F = full screen · M = music on/off</p>
+    <p class="tips" style="font-size:11px!important;opacity:.7">Piano sound: Salamander Grand Piano by Alexander Holm (CC BY 3.0)</p>
+  </div>
+</div>
+
+<div class="overlay" id="endScreen" hidden>
+  <div class="card">
+    <div class="pic">🎉❤️🎉</div>
+    <h1>Great singing!</h1>
+    <p>God looks at your heart.</p>
+    <button class="big" id="again">▶ Sing it again</button>
+  </div>
+</div>
+
+<script>
+// ---------- The song (original words, sung to "Twinkle, Twinkle, Little Star") ----------
+// Each line: [words with hyphens between syllables, picture, action]. Every line has 7 syllables.
+const REF = [
+  ["God looks at the heart, it's true,", "❤️", "Hands on your heart"],
+  ["God sees me and God sees you!", "👀", "Point to yourself, then a friend"]
+];
+const VERSES = [
+  [
+    ["Sev-en bro-thers, big and tall,", "👦👦👦👦👦👦👦", "Stand up tall!"],
+    ["God said, “Not him!” to them all.", "🙅", "Shake your head: “Not him!”"],
+    ["Then came Da-vid, shep-herd boy,", "👦🐑", "Hold your shepherd's staff"],
+    ["God said, “Yes!” Let's jump for joy!", "🎉", "Jump for joy!"],
+    ...REF
+  ],
+  [
+    ["God's not look-ing at my clothes,", "👕", "Touch your shirt"],
+    ["Or my hair, or eyes, or nose.", "💇 👀 👃", "Touch your hair, eyes, nose"],
+    ["God looks deep in-side my heart,", "❤️", "Hands on your heart"],
+    ["Loves me, ev-ery sin-gle part!", "🤗", "Give yourself a hug"],
+    ...REF
+  ],
+  [
+    ["Come near God, and He'll come near,", "👣", "Take a tiny step forward"],
+    ["He is with us, al-ways here.", "🙌", "Arms out wide"],
+    ["I can talk to God and pray,", "🙏", "Fold your hands"],
+    ["I can know Him ev-ery day!", "☀️🌙", "Hands up high!"],
+    ...REF
+  ]
+];
+
+// ---------- Music ----------
+// Melody sits at normal singing pitch (middle C up to A).
+const A = [60,60,67,67,69,69,67], B = [65,65,64,64,62,62,60], C = [67,67,65,65,64,64,62];
+const MEL = [A,B,C,C,A,B];
+// Left hand: low bass note, then a soft chord ("oom-pah").
+const CHORD = { C:[36,[48,52,55]], F:[41,[48,53,57]], G:[43,[47,50,55]] };
+const PROG = [["C","C","F","C"],["F","C","G","C"],["C","F","C","G"],["C","F","C","G"],["C","C","F","C"],["F","C","G","C"]];
+const OFF = [0,1,2,3,4,5,6], DUR = [1,1,1,1,1,1,2];
+const SPEEDS = [[54,"🐌 Extra slow"],[66,"🐢 Slow"],[80,"🐇 Normal"]];
+
+const SEG = [], EV = [];
+function addLineMusic(mel, prog, at){
+  mel.forEach((m,i) => EV.push({b:at+OFF[i], d:DUR[i], f:(t,d)=>piano(m,t,d,1)}));
+  prog.forEach((name,i) => oomPah(name, at + i*2));
+}
+function oomPah(name, at){
+  const [bs,pd] = CHORD[name];
+  EV.push({b:at,   d:1, f:(t,d)=>piano(bs,t,d,.6)});
+  EV.push({b:at+1, d:1, f:(t,d)=>pd.forEach(m=>piano(m,t,d,.32))});
+}
+const parse = txt => txt.split(" ").map(w => w.split("-"));
+const plain = txt => txt.replace(/-/g,"");
+
+let beat = 0;
+SEG.push({type:"intro", v:0, start:0, len:8});
+addLineMusic(B, PROG[1], 0);
+beat = 8;
+VERSES.forEach((lines,vi) => {
+  if(vi > 0){
+    SEG.push({type:"gap", v:vi, start:beat, len:4, first:plain(lines[0][0])});
+    oomPah("G", beat); oomPah("G", beat+2);
+    beat += 4;
+  }
+  lines.forEach((ln,li) => {
+    const words = parse(ln[0]);
+    if(words.flat().length !== 7) console.warn("Line does not have 7 syllables:", ln[0]);
+    let next = "";
+    if(li < lines.length-1) next = "Next: " + plain(lines[li+1][0]);
+    else if(vi < VERSES.length-1) next = "Next: Verse " + (vi+2);
+    SEG.push({type:"line", v:vi, li, start:beat, len:8, words, pic:ln[1], act:ln[2], next});
+    addLineMusic(MEL[li], PROG[li], beat);
+    beat += 8;
+  });
+});
+SEG.push({type:"end", v:2, start:beat, len:4});
+[60,64,67,72].forEach((m,i) => EV.push({b:beat+i*.5, d:i<3?.5:2.5, f:(t,d)=>piano(m,t,d,.8)}));
+EV.push({b:beat+1.5, d:2.5, f:(t,d)=>{piano(36,t,d,.6); [48,52,55].forEach(m=>piano(m,t,d,.32));}});
+const TOTAL = beat + 4;
+EV.sort((a,b) => a.b - b.b);
+
+// ---------- Sound: a real recorded piano, with a warm built-in sound if there's no internet ----------
+const SAMPLE_URL = "https://tonejs.github.io/audio/salamander/";
+const SAMPLES = {36:"C2",39:"Ds2",42:"Fs2",45:"A2",48:"C3",51:"Ds3",54:"Fs3",57:"A3",60:"C4",63:"Ds4",66:"Fs4",69:"A4",72:"C5"};
+const buffers = {};
+let pianoState = "loading", loadPromise = null;
+let ctx, master, dry, wet, muted = false;
+const active = new Set();
+function initAudio(){
+  if(ctx) return;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const comp = ctx.createDynamicsCompressor();
+  master = ctx.createGain(); master.gain.value = muted ? 0 : 1;
+  master.connect(comp); comp.connect(ctx.destination);
+  dry = ctx.createGain(); dry.gain.value = .85; dry.connect(master);
+  const room = ctx.createConvolver(); room.buffer = makeRoom(2.2);
+  wet = ctx.createGain(); wet.gain.value = .2; wet.connect(room); room.connect(master);
+}
+function makeRoom(sec){
+  const rate = ctx.sampleRate, len = Math.floor(rate * sec), buf = ctx.createBuffer(2, len, rate);
+  for(let ch = 0; ch < 2; ch++){
+    const d = buf.getChannelData(ch);
+    for(let i = 0; i < len; i++) d[i] = (Math.random()*2 - 1) * Math.pow(1 - i/len, 3);
+  }
+  return buf;
+}
+function loadPiano(){
+  initAudio();
+  const jobs = Object.entries(SAMPLES).map(([m,name]) =>
+    fetch(SAMPLE_URL + name + ".mp3")
+      .then(r => { if(!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+      .then(ab => new Promise((res,rej) => ctx.decodeAudioData(ab, res, rej)))
+      .then(buf => { buffers[m] = buf; }));
+  loadPromise = Promise.allSettled(jobs).then(() => {
+    pianoState = Object.keys(buffers).length >= 9 ? "ready" : "synth";
+    $("pianoStatus").textContent = pianoState === "ready"
+      ? "🎹 Piano sound ready"
+      : "🎹 No internet, so it will use the built-in piano sound";
+  });
+  return loadPromise;
+}
+const mf = m => 440 * Math.pow(2, (m-69)/12);
+function track(node){ active.add(node); node.onended = () => { active.delete(node); node.disconnect(); }; }
+function out(node){ node.connect(dry); node.connect(wet); }
+function piano(m, t, d, vel){
+  if(pianoState === "ready") return samplePiano(m, t, d, vel);
+  return synthPiano(m, t, d, vel);
+}
+function samplePiano(m, t, d, vel){
+  let k = null, best = 1e9;
+  for(const key in buffers){ const dist = Math.abs(key - m); if(dist < best){ best = dist; k = +key; } }
+  const src = ctx.createBufferSource();
+  src.buffer = buffers[k]; src.playbackRate.value = Math.pow(2, (m - k)/12);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(vel, t);
+  g.gain.setTargetAtTime(0, t + d, .18);
+  src.connect(g); out(g);
+  src.start(t); src.stop(t + d + 1.2); track(src);
+}
+let wave = null;
+function synthPiano(m, t, d, vel){
+  if(!wave){
+    const amps = [0, 1, .55, .32, .18, .1, .06, .035, .02];
+    wave = ctx.createPeriodicWave(new Float32Array(amps.length), new Float32Array(amps));
+  }
+  const f = mf(m);
+  const o = ctx.createOscillator(); o.setPeriodicWave(wave); o.frequency.value = f;
+  const lpf = ctx.createBiquadFilter(); lpf.type = "lowpass";
+  lpf.frequency.setValueAtTime(Math.min(8000, f*8), t);
+  lpf.frequency.setTargetAtTime(Math.max(400, f*2), t, .25);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(.35*vel, t + .005);
+  g.gain.setTargetAtTime(0, t + .005, .5 + (72 - m)*.015);
+  g.gain.setTargetAtTime(0, t + d, .15);
+  o.connect(lpf); lpf.connect(g); out(g);
+  o.start(t); o.stop(t + d + 1); track(o);
+}
+function stopAll(){
+  active.forEach(o => { try{ o.stop(); }catch(e){} try{ o.disconnect(); }catch(e){} });
+  active.clear();
+}
+
+// ---------- Timing ----------
+let started = false, playing = false, finished = false;
+let bpm = 66, spb = 60/66, b0 = 0, t0 = 0, evi = 0;
+const lat = () => (ctx.outputLatency || 0) + (ctx.baseLatency || 0);
+function nowBeat(){
+  if(!ctx || !started) return 0;
+  return b0 + Math.max(0, ctx.currentTime - lat() - t0) / spb;
+}
+const beatTime = b => t0 + (b - b0) * spb;
+function pump(){
+  if(!playing) return;
+  const lim = ctx.currentTime + .2;
+  while(evi < EV.length){
+    const e = EV[evi], t = beatTime(e.b);
+    if(t > lim) break;
+    if(t >= ctx.currentTime - .03) e.f(Math.max(t, ctx.currentTime), e.d * spb);
+    evi++;
+  }
+}
+setInterval(pump, 40);
+
+function seek(b){
+  stopAll();
+  b = Math.max(0, Math.min(b, TOTAL - .01));
+  b0 = b; t0 = ctx.currentTime + .06; evi = 0;
+  while(evi < EV.length && EV[evi].b < b - 1e-6) evi++;
+  curSI = -1;
+}
+let starting = false;
+async function begin(at = 0){
+  if(starting) return;
+  starting = true;
+  initAudio(); ctx.resume(); goFull();
+  $("startScreen").hidden = true; $("endScreen").hidden = true; $("paused").hidden = true;
+  if(pianoState === "loading"){
+    $("act").textContent = "Loading piano…";
+    await Promise.race([loadPromise, new Promise(r => setTimeout(r, 6000))]);
+    if(pianoState === "loading") pianoState = "synth";
+  }
+  started = true; playing = true; finished = false; starting = false;
+  seek(at); updPP(); showControls();
+}
+function pause(){
+  if(!started || !playing) return;
+  playing = false; ctx.suspend();
+  $("paused").hidden = false; updPP(); showControls(true);
+}
+function resume(){
+  if(!started || playing) return;
+  playing = true; ctx.resume();
+  $("paused").hidden = true; updPP(); showControls();
+}
+function toggle(){ if(!started) begin(0); else if(playing) pause(); else resume(); }
+function finish(){
+  started = false; playing = false; finished = true;
+  $("endScreen").hidden = false; $("paused").hidden = true; updPP(); showControls(true);
+}
+function jumpTo(b){ if(!started) begin(b); else { seek(b); resume(); } }
+function stepLine(dir){
+  if(!started) return;
+  const b = nowBeat(), si = segAt(b), rel = b - SEG[si].start;
+  let target;
+  if(dir < 0) target = (rel > 2 || si === 0) ? SEG[si].start : SEG[si-1].start;
+  else target = (si+1 < SEG.length && SEG[si+1].type !== "end") ? SEG[si+1].start : SEG[si].start;
+  jumpTo(target);
+}
+function setBpm(n){
+  const b = nowBeat();
+  bpm = n; spb = 60/n;
+  if(started) seek(b);
+  document.querySelectorAll(".speeds button").forEach(x => x.classList.toggle("on", +x.dataset.bpm === n));
+}
+function toggleMute(){
+  muted = !muted;
+  if(master) master.gain.setTargetAtTime(muted ? 0 : 1, ctx.currentTime, .02);
+  $("mute").textContent = muted ? "🔇 Music off" : "🔊 Music on";
+}
+function goFull(){
+  const d = document.documentElement;
+  if(!document.fullscreenElement && d.requestFullscreen) d.requestFullscreen().catch(()=>{});
+}
+function toggleFull(){
+  if(document.fullscreenElement) document.exitFullscreen(); else goFull();
+}
+
+// ---------- Screen ----------
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const dots = [...document.querySelectorAll(".dot")];
+let curSI = -1, curK = -99, sylEls = [];
+function segAt(b){ let i = 0; for(let k=0;k<SEG.length;k++){ if(SEG[k].start <= b + 1e-9) i = k; else break; } return i; }
+function setPic(p){ $("pic").textContent = p; $("pic").classList.toggle("small", [...p].length > 4); }
+function render(s){
+  dots.forEach((d,i) => d.classList.toggle("on", i === s.v));
+  const act = $("act"), cur = $("cur");
+  act.classList.remove("count"); act.hidden = false;
+  if(s.type === "line"){
+    setPic(s.pic);
+    cur.innerHTML = s.words.map(w => '<span class="w">' + w.map(x => '<span class="s">' + esc(x) + '</span>').join("") + '</span>').join(" ");
+    sylEls = [...cur.querySelectorAll(".s")];
+    $("next").textContent = s.next;
+    act.textContent = s.act;
+  } else if(s.type === "intro"){
+    setPic("🎵");
+    cur.innerHTML = '<span class="plain">Get ready to sing!</span>';
+    $("next").textContent = "Tune: Twinkle, Twinkle, Little Star";
+    act.textContent = "Listen… 🎵";
+  } else if(s.type === "gap"){
+    setPic("❤️");
+    cur.innerHTML = '<span class="plain">Verse ' + (s.v+1) + '</span>';
+    $("next").textContent = "Next: " + s.first;
+    act.textContent = "Get ready…";
+  } else {
+    setPic("🎉");
+    cur.innerHTML = '<span class="plain">Great singing!</span>';
+    $("next").textContent = "God looks at your heart.";
+    act.hidden = true;
+  }
+  cur.classList.remove("in"); void cur.offsetWidth; cur.classList.add("in");
+}
+function frame(){
+  requestAnimationFrame(frame);
+  if(!started) return;
+  const b = nowBeat();
+  if(b >= TOTAL){ finish(); return; }
+  const si = segAt(b), s = SEG[si];
+  if(si !== curSI){ curSI = si; curK = -99; render(s); }
+  const rel = b - s.start, k = Math.floor(rel);
+  if(s.type === "line"){
+    const kk = Math.min(6, k);
+    if(kk !== curK){
+      curK = kk;
+      sylEls.forEach((el,i) => { el.classList.toggle("done", i < kk); el.classList.toggle("now", i === kk); });
+    }
+  } else if(s.type === "intro" || s.type === "gap"){
+    const from = s.type === "intro" ? 5 : 1;
+    if(k !== curK){
+      curK = k;
+      if(k >= from){ $("act").textContent = String(s.len - k); $("act").classList.add("count"); }
+    }
+  }
+  $("bar").style.width = (b / TOTAL * 100) + "%";
+}
+requestAnimationFrame(frame);
+
+// ---------- Controls ----------
+function updPP(){ $("pp").textContent = playing ? "⏸ Pause" : "▶ Play"; }
+let hideT;
+function showControls(keep){
+  $("controls").classList.remove("hide"); document.body.style.cursor = "";
+  clearTimeout(hideT);
+  if(!keep) hideT = setTimeout(() => { if(playing){ $("controls").classList.add("hide"); document.body.style.cursor = "none"; } }, 2500);
+}
+document.querySelectorAll(".speeds").forEach(box => {
+  SPEEDS.forEach(([n,label]) => {
+    const b = document.createElement("button");
+    b.dataset.bpm = n; b.textContent = label; if(n === bpm) b.classList.add("on");
+    b.onclick = e => { setBpm(n); e.currentTarget.blur(); };
+    box.appendChild(b);
+  });
+});
+const click1 = (id, fn) => $(id).addEventListener("click", e => { fn(); e.currentTarget.blur(); });
+click1("go", () => begin(0));
+click1("again", () => begin(0));
+click1("pp", () => { if(finished) begin(0); else toggle(); });
+click1("restart", () => begin(0));
+click1("mute", toggleMute);
+click1("full", toggleFull);
+dots.forEach((d,i) => d.addEventListener("click", e => {
+  const target = i === 0 ? 0 : SEG.find(s => s.type === "gap" && s.v === i).start;
+  jumpTo(target); e.currentTarget.blur();
+}));
+document.addEventListener("mousemove", () => showControls(!playing));
+document.addEventListener("keydown", e => {
+  const k = e.key;
+  if(k === " "){ e.preventDefault(); if(finished) begin(0); else toggle(); }
+  else if(k === "Enter" && !started){ e.preventDefault(); begin(0); }
+  else if(k === "ArrowRight"){ e.preventDefault(); stepLine(1); }
+  else if(k === "ArrowLeft"){ e.preventDefault(); stepLine(-1); }
+  else if(k === "f" || k === "F") toggleFull();
+  else if(k === "m" || k === "M") toggleMute();
+  else if(k === "r" || k === "R") begin(0);
+  else if(k === "1" || k === "2" || k === "3") setBpm(SPEEDS[+k-1][0]);
+  else return;
+  showControls(!playing);
+});
+render(SEG[0]);
+loadPiano();
+</script>
+</body>
+</html>
